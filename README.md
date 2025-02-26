@@ -1,7 +1,7 @@
 # CS474_p1_TeamETS
 
 Team Members:
-  Eric Johnson, Thomas Pengelly
+  Eric Johnson, Thomas Pengelly, Maten Karim
 
 Potential Github projects:
 https://github.com/kishanrajput23/Java-Projects-Collections
