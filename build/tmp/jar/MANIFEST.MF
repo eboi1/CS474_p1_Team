@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: app.finwave.backend.Main
+Implementation-Version: 1.6.2
+
