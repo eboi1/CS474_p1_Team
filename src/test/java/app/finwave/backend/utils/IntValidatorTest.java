@@ -1,4 +1,4 @@
-package app.finwave.backend.utils.tests;
+package app.finwave.backend.utils;
 
 import app.finwave.backend.utils.params.InvalidParameterException;
 import app.finwave.backend.utils.params.validators.IntValidator;
