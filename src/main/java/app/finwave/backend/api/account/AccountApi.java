@@ -240,7 +240,7 @@ public class AccountApi {
         return ApiMessage.of("Account deleted");
     }
 
-    static class GetAccountsListResponse extends ApiResponse {
+    public static class GetAccountsListResponse extends ApiResponse {
         public final List<Entry> accounts;
 
         public GetAccountsListResponse(List<AccountsRecord> records) {
@@ -257,10 +257,10 @@ public class AccountApi {
                     .toList();
         }
 
-        record Entry(long accountId, long folderId, long currencyId, BigDecimal amount, boolean hidden, String name, String description) {}
+        public record Entry(long accountId, long folderId, long currencyId, BigDecimal amount, boolean hidden, String name, String description) {}
     }
 
-    static class NewAccountResponse extends ApiResponse {
+    public static class NewAccountResponse extends ApiResponse {
         public final long accountId;
 
         public NewAccountResponse(long accountId) {
