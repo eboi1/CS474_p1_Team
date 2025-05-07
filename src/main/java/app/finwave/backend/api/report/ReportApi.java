@@ -140,9 +140,11 @@ public class ReportApi {
 
     static class NewReportResponse extends ApiResponse {
         public final long reportId;
+        public final String fileId;
 
         public NewReportResponse(long reportId, String fileId) {
             this.reportId = reportId;
+            this.fileId = fileId;
         }
     }
 }

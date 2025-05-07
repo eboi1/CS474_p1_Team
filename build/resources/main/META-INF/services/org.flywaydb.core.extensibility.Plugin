@@ -1,3 +1,0 @@
-org.flywaydb.core.internal.database.postgresql.PostgreSQLDatabaseType
-org.flywaydb.core.internal.database.postgresql.PostgreSQLConfigurationExtension
-org.flywaydb.core.internal.resource.CoreResourceTypeProvider

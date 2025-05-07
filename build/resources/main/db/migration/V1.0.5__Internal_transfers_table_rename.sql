@@ -1,1 +1,0 @@
-alter table internal_transfers rename to internal_transactions_metadata

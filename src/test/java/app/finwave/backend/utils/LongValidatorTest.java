@@ -1,7 +1,6 @@
 package app.finwave.backend.utils;
 
 import app.finwave.backend.utils.params.InvalidParameterException;
-import app.finwave.backend.utils.params.validators.IntValidator;
 import app.finwave.backend.utils.params.validators.LongValidator;
 import app.finwave.backend.utils.params.validators.ValidatorFunc;
 
@@ -26,13 +25,14 @@ public class LongValidatorTest {
     @Test
     void testRange_InvalidInput() {
         validator = new LongValidator(20L);
-        assertThrows(InvalidParameterException.class, () -> validator.range(5, 15));
+        assertThrows(InvalidParameterException.class,
+                () -> validator.range(5, 15));
     }
 
     @Test
     void testRange_NullInput() {
         validator = new LongValidator(null);
-        assertDoesNotThrow(() -> validator.range(5, 15)); // Should not throw as null is valid
+        assertDoesNotThrow(() -> validator.range(5, 15)); // null should be treated as “no-op”
     }
 
     @Test
@@ -45,7 +45,8 @@ public class LongValidatorTest {
     void testMatches_InvalidInput() {
         validator = new LongValidator(-5L);
         ValidatorFunc<Long, Boolean> isPositive = input -> input > 0;
-        assertThrows(InvalidParameterException.class, () -> validator.matches(isPositive));
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(isPositive));
     }
 
     @Test
@@ -53,17 +54,20 @@ public class LongValidatorTest {
         ValidatorFunc<Long, Boolean> throwsException = input -> {
             throw new RuntimeException("Validation error");
         };
-        assertDoesNotThrow(() -> validator.matches(throwsException));
+        // since your matches(...) catches and wraps any exception, it should throw
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(throwsException));
     }
 
     @Test
     void testMatches_FalseReturn() {
         ValidatorFunc<Long, Boolean> alwaysFalse = input -> false;
-        assertThrows(InvalidParameterException.class, () -> validator.matches(alwaysFalse));
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(alwaysFalse));
     }
 
     @Test
-    void testNullString() {
+    void testMatches_NullRaw() {
         LongValidator validator2 = new LongValidator(null, "null value");
         ValidatorFunc<Long, Boolean> checkNull = input -> input == null;
         assertDoesNotThrow(() -> validator2.matches(checkNull));

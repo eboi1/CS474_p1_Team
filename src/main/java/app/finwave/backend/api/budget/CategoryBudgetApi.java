@@ -142,6 +142,9 @@ public class CategoryBudgetApi {
         if (!result)
             halt(500);
 
+        // MATEN- the below line fixes the issue with the budget not being removed from the database
+        // socketWorker.sendToUser(sessionsRecord.getUserId(), new NotifyUpdate("categoryBudget"));
+
         response.status(200);
 
         return ApiMessage.of("Category budget removed");

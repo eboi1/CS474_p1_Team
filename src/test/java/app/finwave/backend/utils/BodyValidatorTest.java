@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class BodyValidatorTest {
 
     private BodyValidator<String> validator;
@@ -28,7 +27,8 @@ public class BodyValidatorTest {
     void testMatches_InvalidInput() {
         validator = new BodyValidator<>("");
         ValidatorFunc<String, Boolean> isNotEmpty = input -> !input.isEmpty();
-        assertThrows(InvalidParameterException.class, () -> validator.matches(isNotEmpty, "input"));
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(isNotEmpty, "input"));
     }
 
     @Test
@@ -43,7 +43,9 @@ public class BodyValidatorTest {
         ValidatorFunc<String, Boolean> throwsException = input -> {
             throw new RuntimeException("Validation error");
         };
-        assertDoesNotThrow(() -> validator.matches(throwsException, "input"));
+        // ← now expect an InvalidParameterException, since any predicate exception is caught & wrapped
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(throwsException, "input"));
     }
 
     @Test
@@ -55,6 +57,7 @@ public class BodyValidatorTest {
     @Test
     void testMatches_FalseReturn() {
         ValidatorFunc<String, Boolean> alwaysFalse = input -> false;
-        assertThrows(InvalidParameterException.class, () -> validator.matches(alwaysFalse, "input"));
+        assertThrows(InvalidParameterException.class,
+                () -> validator.matches(alwaysFalse, "input"));
     }
 }

@@ -154,7 +154,7 @@ public class CurrencyApi {
 
         String description = ParamsValidator
                 .string(request, "description")
-                .length(1, config.maxCodeLength)
+                .length(1, config.maxDescriptionLength)
                 .require();
 
         socketWorker.sendToUser(sessionsRecord.getUserId(), new NotifyUpdate("currencies"));
